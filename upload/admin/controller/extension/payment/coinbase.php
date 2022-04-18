@@ -1,12 +1,12 @@
 <?php
 
-class ControllerExtensionPaymentCoinbase extends Controller
+class ControllerExtensionPaymentPrivacyGate extends Controller
 {
     private $error = array();
 
     public function index()
     {
-        $this->load->language('extension/payment/coinbase');
+        $this->load->language('extension/payment/privacygate');
         $this->document->setTitle($this->language->get('heading_title'));
 
         $this->load->model('setting/setting');
@@ -14,15 +14,15 @@ class ControllerExtensionPaymentCoinbase extends Controller
         $this->load->model('localisation/geo_zone');
 
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            $this->model_setting_setting->editSetting('payment_coinbase', $this->request->post);
+            $this->model_setting_setting->editSetting('payment_privacygate', $this->request->post);
             $this->session->data['success'] = $this->language->get('text_success');
             $this->response->redirect($this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=payment', true));
         }
 
         //Callback Url
-        $callbackUrl = $this->url->link('extension/payment/coinbase/callback', '', true);
+        $callbackUrl = $this->url->link('extension/payment/privacygate/callback', '', true);
 
-        $data['action'] = $this->url->link('extension/payment/coinbase', 'user_token=' . $this->session->data['user_token'], true);
+        $data['action'] = $this->url->link('extension/payment/privacygate', 'user_token=' . $this->session->data['user_token'], true);
         $data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'] . '&type=payment', true);
         $data['callback_url'] = str_replace('admin/', '', $callbackUrl);
         $data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
@@ -57,23 +57,23 @@ class ControllerExtensionPaymentCoinbase extends Controller
         );
         $data['breadcrumbs'][] = array(
             'text' => $this->language->get('heading_title'),
-            'href' => $this->url->link('extension/payment/coinbase', 'user_token=' . $this->session->data['user_token'], true)
+            'href' => $this->url->link('extension/payment/privacygate', 'user_token=' . $this->session->data['user_token'], true)
         );
 
         $fields = array(
-            'payment_coinbase_status',
-            'payment_coinbase_api_key',
-            'payment_coinbase_api_secret',
-            'payment_coinbase_api_test_mode',
-            'payment_coinbase_order_status_id',
-            'payment_coinbase_completed_status_id',
-            'payment_coinbase_pending_status_id',
-            'payment_coinbase_resolved_status_id',
-            'payment_coinbase_unresolved_status_id',
-            'payment_coinbase_expired_status_id',
-            'payment_coinbase_geo_zone_id',
-            'payment_coinbase_total',
-            'payment_coinbase_sort_order'
+            'payment_privacygate_status',
+            'payment_privacygate_api_key',
+            'payment_privacygate_api_secret',
+            'payment_privacygate_api_test_mode',
+            'payment_privacygate_order_status_id',
+            'payment_privacygate_completed_status_id',
+            'payment_privacygate_pending_status_id',
+            'payment_privacygate_resolved_status_id',
+            'payment_privacygate_unresolved_status_id',
+            'payment_privacygate_expired_status_id',
+            'payment_privacygate_geo_zone_id',
+            'payment_privacygate_total',
+            'payment_privacygate_sort_order'
         );
 
         foreach ($fields as $field) {
@@ -88,24 +88,24 @@ class ControllerExtensionPaymentCoinbase extends Controller
         $data['column_left'] = $this->load->controller('common/column_left');
         $data['footer'] = $this->load->controller('common/footer');
 
-        $this->response->setOutput($this->load->view('extension/payment/coinbase', $data));
+        $this->response->setOutput($this->load->view('extension/payment/privacygate', $data));
     }
 
     protected function validate()
     {
         $this->load->model('setting/setting');
 
-        if (!$this->user->hasPermission('modify', 'extension/payment/coinbase')) {
+        if (!$this->user->hasPermission('modify', 'extension/payment/privacygate')) {
             $this->error['warning'] = $this->language->get('error_permission');
         }
 
-        if (!$this->request->post['payment_coinbase_api_key'] ||
-            empty($this->request->post['payment_coinbase_api_key'])) {
+        if (!$this->request->post['payment_privacygate_api_key'] ||
+            empty($this->request->post['payment_privacygate_api_key'])) {
             $this->error['api_key'] = $this->language->get('error_api_key');
         }
 
-        if (!$this->request->post['payment_coinbase_api_secret'] ||
-            empty($this->request->post['payment_coinbase_api_secret'])) {
+        if (!$this->request->post['payment_privacygate_api_secret'] ||
+            empty($this->request->post['payment_privacygate_api_secret'])) {
             $this->error['api_secret'] = $this->language->get('error_api_secret');
         }
 
@@ -114,15 +114,15 @@ class ControllerExtensionPaymentCoinbase extends Controller
 
     public function install()
     {
-        $this->load->model('extension/payment/coinbase');
+        $this->load->model('extension/payment/privacygate');
 
-        $this->model_extension_payment_coinbase->install();
+        $this->model_extension_payment_privacygate->install();
     }
 
     public function uninstall()
     {
-        $this->load->model('extension/payment/coinbase');
+        $this->load->model('extension/payment/privacygate');
 
-        $this->model_extension_payment_coinbase->uninstall();
+        $this->model_extension_payment_privacygate->uninstall();
     }
 }

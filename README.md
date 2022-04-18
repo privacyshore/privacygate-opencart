@@ -1,5 +1,5 @@
-# Coinbase Commerce Payment Module
-Accept Cryptocurrencies on your Opencart store with Coinbase Commerce module.
+# PrivacyGate Payment Module
+Accept Cryptocurrencies on your Opencart store with PrivacyGate module.
 
 ## Prerequisite
 - SSL enabled.
@@ -7,7 +7,7 @@ Accept Cryptocurrencies on your Opencart store with Coinbase Commerce module.
 ## Accepted Cryptocurrencies
 1. It will accept Cryptocurrencies payment on your store with ease.
 2. Secure payment, goes directly into your own Cryptocurrency wallet.
-3. Following Cryptocurrencies are accepted by the Coinbase Commerce.
+3. Following Cryptocurrencies are accepted by the PrivacyGate.
     - Bitcoin
     - Bitcoin Cash
     - DAI
@@ -16,7 +16,7 @@ Accept Cryptocurrencies on your Opencart store with Coinbase Commerce module.
     - USD Coin
 
 ## Create an Account
-If you don't have a Coinbase Commerce account, <a href="https://commerce.coinbase.com/dashboard/settings">Sign Up</a>.
+If you don't have a PrivacyGate account, <a href="https://dash.privacygate.io/settings">Sign Up</a>.
 
 ## Manual installation
 
@@ -37,20 +37,20 @@ Note: If extension is not showing after installation. Perform above step again (
 
 ## Generate API Credentials
 
-1. Create an API Key <a href="https://commerce.coinbase.com/dashboard/settings"> Coinbase Commerce Dashboard </a> -> API keys -> Create an API key.
-2. Get the API Secret <a href="https://commerce.coinbase.com/dashboard/settings"> Coinbase Commerce Dashboard </a> -> Show Shared Secrets.
+1. Create an API Key <a href="https://dash.privacygate.io/settings"> PrivacyGate Dashboard </a> -> API keys -> Create an API key.
+2. Get the API Secret <a href="https://dash.privacygate.io/settings"> PrivacyGate Dashboard </a> -> Show Shared Secrets.
 
 ## Enable Module in Opencart Admin
 
 1.	Configure module in Extensions -> Extensions -> Choose the extension type.
 2.	Select “Payments” from dropdown.
-3.	Scroll down to 'Coinbase Commerce'. Note: If extension is not showing "clear the cache"
+3.	Scroll down to 'PrivacyGate'. Note: If extension is not showing "clear the cache"
 4.	Payment Method Enabled - Set "Enabled" to activate it.
 5.	Generate the API’s using the Sign in or Sign Up Page.
 6.	API Key - paste the API key. 
 7.	API Secret - paste the API secret.
 8.	Test Mode – No (By Default).
-9. CALLBACK URL - copy the given link to <a href="https://commerce.coinbase.com/dashboard/settings"> Coinbase Commerce Dashboard </a> -> Webhook subscriptions -> Add an endpoint.
+9. CALLBACK URL - copy the given link to <a href="https://dash.privacygate.io/settings"> PrivacyGate Dashboard </a> -> Webhook subscriptions -> Add an endpoint.
 10.	Total – The amount Order must reach before this payment method becomes active.
 11.	Order Status - Pending (By default – The status assigned to new orders).
 12.	Completed Status – If order Payment received -> Processing state will be assigned to it.
@@ -64,8 +64,8 @@ Click "Save" on the upper right part of the screen.
 
 ## Step by Step Details:
 - At Checkout Page customer will enter his/her shipping address.
-- Select the payment method "Coinbase Commerce" and hit the "Pay with Coinbase Commerce" button.
-- Coinbase Commerce module will redirect the customer to the Payment Interface. 
+- Select the payment method "PrivacyGate" and hit the "Pay with PrivacyGate" button.
+- PrivacyGate module will redirect the customer to the Payment Interface. 
 - Under this payment window customer will have to pay within 15 minutes. 
 - Once paid customer will be redirected to Opencart store with a Success or Failure message.
 - Order status will be "Denied" in the following UNRESOLVED cases: (Multiple, Underpaid or Overpaid paymnet).
@@ -82,4 +82,4 @@ To resolve the order status of “Denied” Order. Merchant/Admin will have to f
 [Open Source License](LICENSE)
 
 ## Integrate with other e-commerce platforms
-[Coinbase Commerce Integrations](https://commerce.coinbase.com/integrate)
+[PrivacyGate Integrations](https://privacygate.io/docs/)

@@ -1,15 +1,15 @@
 <?php
 
-class ModelExtensionPaymentCoinbase extends Model
+class ModelExtensionPaymentPrivacyGate extends Model
 {
     public function addOrder($data)
     {
-        $this->db->query("INSERT INTO `" . DB_PREFIX . "coinbase_commerce_order` SET `store_order_id` = '" . (int)$data['store_order_id'] . "', `store_total_amount` = '" . $this->db->escape($data['store_total_amount']) . "', `coinbase_commerce_charge_code` = '" . $this->db->escape($data['coinbase_commerce_charge_code']) . "'");
+        $this->db->query("INSERT INTO `" . DB_PREFIX . "privacygate_order` SET `store_order_id` = '" . (int)$data['store_order_id'] . "', `store_total_amount` = '" . $this->db->escape($data['store_total_amount']) . "', `privacygate_charge_code` = '" . $this->db->escape($data['privacygate_charge_code']) . "'");
     }
 
     public function getOrder($order_id)
     {
-        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "coinbase_commerce_order` WHERE `store_order_id` = '" . (int)$order_id . "' LIMIT 1");
+        $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "privacygate_order` WHERE `store_order_id` = '" . (int)$order_id . "' LIMIT 1");
 
         return $query->row;
     }
@@ -18,19 +18,19 @@ class ModelExtensionPaymentCoinbase extends Model
     {
         foreach($data['fields'] as $key => $value) {
             //echo "{$key} => {$value} ";
-            $this->db->query( "UPDATE `" . DB_PREFIX . "coinbase_commerce_order` SET `" . $key . "` = '" . $value . "' WHERE `store_order_id` = " . $this->db->escape($data['store_order_id']));
+            $this->db->query( "UPDATE `" . DB_PREFIX . "privacygate_order` SET `" . $key . "` = '" . $value . "' WHERE `store_order_id` = " . $this->db->escape($data['store_order_id']));
         }
     }
 
     public function getMethod($address, $total)
     {
-        $this->load->language('extension/payment/coinbase');
+        $this->load->language('extension/payment/privacygate');
 
-        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payment_coinbase_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('payment_privacygate_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
 
-        if ($this->config->get('payment_coinbase_total') > 0 && $this->config->get('payment_coinbase_total') > $total) {
+        if ($this->config->get('payment_privacygate_total') > 0 && $this->config->get('payment_privacygate_total') > $total) {
             $status = false;
-        } elseif (!$this->config->get('payment_coinbase_geo_zone_id')) {
+        } elseif (!$this->config->get('payment_privacygate_geo_zone_id')) {
             $status = true;
         } elseif ($query->num_rows) {
             $status = true;
@@ -42,10 +42,10 @@ class ModelExtensionPaymentCoinbase extends Model
 
         if ($status) {
             $method_data = array(
-                'code' => 'coinbase',
+                'code' => 'privacygate',
                 'title' => $this->language->get('text_title'),
                 'terms' => '',
-                'sort_order' => $this->config->get('payment_coinbase_sort_order')
+                'sort_order' => $this->config->get('payment_privacygate_sort_order')
             );
         }
 
